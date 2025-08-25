@@ -22,13 +22,13 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Analytics 4 (replace GA_MEASUREMENT_ID) -->
+  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-G26464Y3JF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-G26464Y3JF'); // TODO: replace with your GA4 ID
+    gtag('config', 'G-G26464Y3JF');
   </script>
 
   <style>
@@ -125,13 +125,43 @@
     </div>
   </section>
 
-  <!-- Contact (shortened for brevity) -->
+  <!-- Contact -->
   <section id="contact" class="py-14 md:py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl md:text-4xl font-bold">Let’s get your yard dialed in</h2>
-      <div class="mt-6 space-y-2 text-gray-800">
-        <div class="flex items-center gap-2">📞 <a class="hover:underline" href="tel:+19132217981">(913) 221-7981</a></div>
-        <div class="flex items-center gap-2">✉️ <a class="hover:underline" href="mailto:kslawnranger@gmail.com">kslawnranger@gmail.com</a></div>
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold">Let’s get your yard dialed in</h2>
+          <div class="mt-6 space-y-2 text-gray-800">
+            <div class="flex items-center gap-2">📞 <a class="hover:underline" href="tel:+19132217981">(913) 221-7981</a></div>
+            <div class="flex items-center gap-2">✉️ <a class="hover:underline" href="mailto:kslawnranger@gmail.com">kslawnranger@gmail.com</a></div>
+            <div class="flex items-center gap-2">🕒 Monday–Saturday 7:00 AM – 6:00 PM</div>
+            <div class="flex items-center gap-2">📍 Manhattan • Wamego • St. George • Alma • Junction City</div>
+          </div>
+        </div>
+        <div class="rounded-2xl border bg-white p-6 shadow-sm">
+          <form id="contactForm" class="grid gap-3" novalidate>
+            <input class="border rounded-xl p-3" name="name" placeholder="Full Name" required />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <input class="border rounded-xl p-3" name="email" placeholder="Email" type="email" required />
+              <input class="border rounded-xl p-3" name="phone" placeholder="Phone" />
+            </div>
+            <select class="border rounded-xl p-3" name="service">
+              <option>Service Interested In</option>
+              <option>Lawn Mowing & Edging</option>
+              <option>Aeration</option>
+              <option>Overseeding</option>
+              <option>Mulch / Rock</option>
+              <option>Sod Installation</option>
+              <option>Cleanups & Haul‑Away</option>
+              <option>Snow Removal</option>
+              <option>Hardscaping</option>
+            </select>
+            <textarea class="border rounded-xl p-3 min-h-[120px]" name="details" placeholder="Project details, address, and ideal timing"></textarea>
+            <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+            <button type="submit" class="rounded-xl px-5 py-3 bg-emerald-700 text-white hover:bg-emerald-800">Send Message</button>
+            <p id="formMsg" class="text-sm mt-2"></p>
+          </form>
+        </div>
       </div>
     </div>
   </section>
@@ -139,5 +169,41 @@
   <footer class="border-t bg-gray-50">
     <div class="text-xs text-center text-gray-500 py-4">© 2025 KS Lawn Ranger LLC. All rights reserved.</div>
   </footer>
+
+  <!-- Contact form JS (Formspree) -->
+  <script>
+    const ENDPOINT = "https://formspree.io/f/mrblvwde";
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('formMsg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.textContent = "Sending…";
+      msg.className = "text-sm mt-2 text-gray-600";
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      if (data._gotcha) { msg.textContent = "Thanks!"; msg.className = "text-sm mt-2 text-emerald-700"; form.reset(); return; }
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Accept": "application/json" },
+          body: new FormData(form)
+        });
+        if (res.ok) {
+          msg.textContent = "Thanks! Your message was sent.";
+          msg.className = "text-sm mt-2 text-emerald-700";
+          form.reset();
+          if (typeof gtag === 'function') gtag('event', 'generate_lead', { 'event_category': 'Form', 'event_label': 'Contact Form' });
+        } else {
+          msg.textContent = "Couldn’t send. Try email: kslawnranger@gmail.com";
+          msg.className = "text-sm mt-2 text-red-600";
+        }
+      } catch (err) {
+        msg.textContent = "Network error. Email us at kslawnranger@gmail.com";
+        msg.className = "text-sm mt-2 text-red-600";
+      }
+    });
+  </script>
 </body>
 </html>
