@@ -1,0 +1,40 @@
+/* Preview V3 final interaction polish */
+:root{--shadow-soft:0 28px 80px rgba(5,10,7,.12);--shadow-deep:0 36px 110px rgba(5,10,7,.24)}
+body.menu-open{overflow:hidden}
+.progress{box-shadow:0 0 18px rgba(111,23,39,.45)}
+.nav{will-change:padding,background-color,backdrop-filter}
+.nav a{position:relative}
+.navlinks>a:not(.navcta)::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:currentColor;transition:right .35s var(--ease)}
+.navlinks>a:not(.navcta):hover::after,.navlinks>a:not(.navcta):focus-visible::after{right:0}
+.navcta,.flagship-cta,.button,.footer-top>a{transition:transform .3s var(--ease),background-color .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.navcta:hover,.flagship-cta:hover,.button:hover,.footer-top>a:hover{transform:translateY(-2px)}
+.flagship-cta span,.button span,.mobile-cta span,.footer-top>a span,.form button b{display:inline-block;transition:transform .3s var(--ease)}
+.flagship-cta:hover span,.button:hover span,.mobile-cta:hover span,.footer-top>a:hover span,.form button:hover b{transform:translate(3px,-3px)}
+.hero-media img,.project-media img,.commercial-media img{transform:scale(1.055) translate3d(0,var(--parallax-y,0),0);will-change:transform;transition:filter .7s var(--ease)}
+.project-showcase:hover .project-media img,.commercial:hover .commercial-media img{filter:saturate(.92) contrast(1.05)}
+.project-shell,.commercial-panel,.form{filter:drop-shadow(0 20px 50px rgba(0,0,0,.08))}
+.project-facts span,.points span,.trust-list>div,.estimate-meta span{transition:padding-left .3s var(--ease),background-color .3s var(--ease)}
+.project-facts span:hover,.points span:hover,.trust-list>div:hover,.estimate-meta span:hover{padding-left:10px}
+.compare-frame{box-shadow:var(--shadow-deep)}
+.compare-handle{box-shadow:0 10px 35px rgba(0,0,0,.28);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.compare:hover .compare-handle{transform:translate(-50%,-50%) scale(1.08);box-shadow:0 14px 44px rgba(0,0,0,.34)}
+.compare input:focus-visible~.compare-handle{outline:3px solid #fff;outline-offset:5px}
+.service{transition:background-color .35s var(--ease),padding-left .35s var(--ease),padding-right .35s var(--ease)}
+.service:hover{background:rgba(255,255,255,.46);padding-left:18px;padding-right:18px}
+.service h3{transition:letter-spacing .35s var(--ease)}
+.service:hover h3{letter-spacing:-.035em}
+.review-frame{border-radius:2px;box-shadow:var(--shadow-soft);background:#fff;padding:clamp(16px,2vw,30px)}
+.field input,.field textarea,.field select{transition:border-color .25s ease,background-color .25s ease}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--maroon);background:rgba(111,23,39,.025)}
+.form button{transition:transform .25s var(--ease),box-shadow .25s var(--ease),opacity .25s ease}
+.form button:hover{transform:translateY(-2px);box-shadow:0 15px 35px rgba(111,23,39,.2)}
+.form button:disabled{cursor:wait;opacity:.7}
+.form button.is-loading b{animation:sendPulse .8s ease-in-out infinite alternate}
+.mobile-cta{transform:translateY(150%);opacity:0;transition:transform .4s var(--ease),opacity .4s ease,background-color .25s ease;box-shadow:0 14px 34px rgba(10,15,12,.25)}
+.mobile-cta.is-visible{transform:none;opacity:1}
+.mobile-cta:hover{background:#7d1a2c}
+:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+@keyframes sendPulse{to{transform:translate(4px,-4px)}}
+@media(max-width:900px){.navlinks>a:not(.navcta)::after{display:none}.navlinks a{width:100%}.service:hover{padding-left:10px;padding-right:10px}.hero-media img,.project-media img,.commercial-media img{transform:scale(1.035) translate3d(0,var(--parallax-y,0),0)}}
+@media(max-width:560px){.review-frame{padding:10px}.project-facts span:hover,.points span:hover,.trust-list>div:hover,.estimate-meta span:hover{padding-left:0}.service:hover{padding-left:0;padding-right:0;background:transparent}}
+@media(prefers-reduced-motion:reduce){.hero-media img,.project-media img,.commercial-media img{transform:none!important}.mobile-cta{transition:none}.form button.is-loading b{animation:none}}
