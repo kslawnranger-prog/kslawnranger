@@ -5,7 +5,8 @@ body.menu-open{overflow:hidden}
 .nav{will-change:padding,background-color,backdrop-filter}
 .nav a{position:relative}
 .navlinks>a:not(.navcta)::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:currentColor;transition:right .35s var(--ease)}
-.navlinks>a:not(.navcta):hover::after,.navlinks>a:not(.navcta):focus-visible::after{right:0}
+.navlinks>a:not(.navcta):hover::after,.navlinks>a:not(.navcta):focus-visible::after,.navlinks>a.is-active::after{right:0}
+.navlinks>a.is-active{color:#fff}
 .navcta,.flagship-cta,.button,.footer-top>a{transition:transform .3s var(--ease),background-color .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
 .navcta:hover,.flagship-cta:hover,.button:hover,.footer-top>a:hover{transform:translateY(-2px)}
 .flagship-cta span,.button span,.mobile-cta span,.footer-top>a span,.form button b{display:inline-block;transition:transform .3s var(--ease)}
@@ -29,12 +30,19 @@ body.menu-open{overflow:hidden}
 .form button{transition:transform .25s var(--ease),box-shadow .25s var(--ease),opacity .25s ease}
 .form button:hover{transform:translateY(-2px);box-shadow:0 15px 35px rgba(111,23,39,.2)}
 .form button:disabled{cursor:wait;opacity:.7}
-.form button.is-loading b{animation:sendPulse .8s ease-in-out infinite alternate}
+.form button.is-loading span{animation:sendPulse .8s ease-in-out infinite alternate}
+.form-status{margin:.25rem 0 0;font-size:.78rem;line-height:1.5;color:#ffffffb5}
+.form-status.is-success{color:#c9f2d3}
+.form-status.is-error{color:#ffd0d0}
+.form-status a{text-decoration:underline;text-underline-offset:3px}
+.menu span{transform-origin:center;transition:transform .3s var(--ease),opacity .2s ease}
+.nav.open .menu span:first-child{transform:translateY(4px) rotate(45deg)}
+.nav.open .menu span:last-child{transform:translateY(-4px) rotate(-45deg)}
 .mobile-cta{transform:translateY(150%);opacity:0;transition:transform .4s var(--ease),opacity .4s ease,background-color .25s ease;box-shadow:0 14px 34px rgba(10,15,12,.25)}
 .mobile-cta.is-visible{transform:none;opacity:1}
 .mobile-cta:hover{background:#7d1a2c}
 :focus-visible{outline:2px solid currentColor;outline-offset:5px}
 @keyframes sendPulse{to{transform:translate(4px,-4px)}}
-@media(max-width:900px){.navlinks>a:not(.navcta)::after{display:none}.navlinks a{width:100%}.service:hover{padding-left:10px;padding-right:10px}.hero-media img,.project-media img,.commercial-media img{transform:scale(1.035) translate3d(0,var(--parallax-y,0),0)}}
+@media(max-width:900px){.navlinks>a:not(.navcta)::after{display:none}.navlinks a{width:100%;max-width:300px;text-align:center;font-size:.9rem;padding:.7rem}.navlinks>a.is-active{opacity:.7}.service:hover{padding-left:10px;padding-right:10px}.hero-media img,.project-media img,.commercial-media img{transform:scale(1.035) translate3d(0,var(--parallax-y,0),0)}}
 @media(max-width:560px){.review-frame{padding:10px}.project-facts span:hover,.points span:hover,.trust-list>div:hover,.estimate-meta span:hover{padding-left:0}.service:hover{padding-left:0;padding-right:0;background:transparent}}
-@media(prefers-reduced-motion:reduce){.hero-media img,.project-media img,.commercial-media img{transform:none!important}.mobile-cta{transition:none}.form button.is-loading b{animation:none}}
+@media(prefers-reduced-motion:reduce){.hero-media img,.project-media img,.commercial-media img{transform:none!important}.mobile-cta{transition:none}.form button.is-loading span{animation:none}.menu span{transition:none}}
