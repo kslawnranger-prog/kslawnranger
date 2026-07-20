@@ -163,9 +163,14 @@
   document.querySelectorAll('[data-compare]').forEach((compare) => {
     const input = compare.querySelector('input[type="range"]');
     const before = compare.querySelector('.before');
+    const beforePicture = before?.querySelector('picture');
     const line = compare.querySelector('.compare-line');
     const handle = compare.querySelector('.compare-handle');
     if (!input || !before || !line || !handle) return;
+
+    const syncCompareSize = () => {
+      if (beforePicture) beforePicture.style.width = `${compare.clientWidth}px`;
+    };
 
     const updateCompare = () => {
       const value = Number(input.value);
@@ -176,6 +181,12 @@
     };
 
     input.addEventListener('input', updateCompare);
+    syncCompareSize();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(syncCompareSize).observe(compare);
+    } else {
+      window.addEventListener('resize', syncCompareSize, { passive: true });
+    }
     updateCompare();
   });
 
@@ -252,7 +263,7 @@
         button.disabled = true;
         button.classList.add('is-loading');
       }
-      if (buttonLabel) buttonLabel.textContent = 'Sending request…';
+      if (buttonLabel) buttonLabel.textContent = 'Sending requestâ€¦';
       status.textContent = '';
       status.className = 'form-status full';
 
@@ -283,3 +294,4 @@
     });
   }
 })();
+
