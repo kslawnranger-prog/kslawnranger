@@ -1,3 +1,4 @@
+# KS Lawn Ranger
 User-agent: *
 Allow: /
 
