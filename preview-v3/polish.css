@@ -2,7 +2,8 @@
 :root{--shadow-soft:0 28px 80px rgba(5,10,7,.12);--shadow-deep:0 36px 110px rgba(5,10,7,.24)}
 body.menu-open{overflow:hidden}
 .progress{box-shadow:0 0 18px rgba(111,23,39,.45)}
-.nav{will-change:padding,background-color,backdrop-filter}
+.nav{will-change:padding,background-color,backdrop-filter;top:2.25rem;transition:top .3s var(--ease),padding .35s,background-color .35s,backdrop-filter .35s}
+.nav.scrolled{top:0}
 .nav a{position:relative}
 .navlinks>a:not(.navcta)::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:1px;background:currentColor;transition:right .35s var(--ease)}
 .navlinks>a:not(.navcta):hover::after,.navlinks>a:not(.navcta):focus-visible::after,.navlinks>a.is-active::after{right:0}
@@ -45,4 +46,4 @@ body.menu-open{overflow:hidden}
 @keyframes sendPulse{to{transform:translate(4px,-4px)}}
 @media(max-width:900px){.navlinks>a:not(.navcta)::after{display:none}.navlinks a{width:100%;max-width:300px;text-align:center;font-size:.9rem;padding:.7rem}.navlinks>a.is-active{opacity:.7}.service:hover{padding-left:10px;padding-right:10px}.hero-media img,.project-media img,.commercial-media img{transform:scale(1.035) translate3d(0,var(--parallax-y,0),0)}}
 @media(max-width:560px){.review-frame{padding:10px}.project-facts span:hover,.points span:hover,.trust-list>div:hover,.estimate-meta span:hover{padding-left:0}.service:hover{padding-left:0;padding-right:0;background:transparent}}
-@media(prefers-reduced-motion:reduce){.hero-media img,.project-media img,.commercial-media img{transform:none!important}.mobile-cta{transition:none}.form button.is-loading span{animation:none}.menu span{transition:none}}
+@media(prefers-reduced-motion:reduce){.hero-media img,.project-media img,.commercial-media img{transform:none!important}.mobile-cta{transition:none}.form button.is-loading span{animation:none}.menu span{transition:none}.nav{transition:none}}
