@@ -263,7 +263,7 @@
         button.disabled = true;
         button.classList.add('is-loading');
       }
-      if (buttonLabel) buttonLabel.textContent = 'Sending requestâ€¦';
+      if (buttonLabel) buttonLabel.textContent = 'Sending request…';
       status.textContent = '';
       status.className = 'form-status full';
 
@@ -294,4 +294,3 @@
     });
   }
 })();
-
